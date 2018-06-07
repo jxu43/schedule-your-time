@@ -1,0 +1,8 @@
+{
+  "name": "schedule-your-time",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
