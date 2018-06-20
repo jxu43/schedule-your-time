@@ -7,8 +7,34 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  开始你的旅程吧
+<ion-content padding class="card-background-page">
+
+  <div *ngIf="tasks">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12 col-lg-4 *ngFor="let task of tasks">
+          <ion-card>
+            <div>{{ task.title }}</div>
+            <div>{{ task.description }}</div>
+            <div>
+              {{ task.startTime }}
+            </div>
+            <div>
+              {{ task.endTime }}
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div [hidden]="tasks || errMess">
+    <ion-spinner></ion-spinner>
+    <h4>Loading . . . Please Wait</h4>
+  </div>
+  <div *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
 
   <ion-fab right bottom>
     <button ion-fab color="accent" (click)="addTask()">

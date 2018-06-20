@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 
 /**
  * Generated class for the AddTaskPage page.
@@ -15,9 +16,18 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class AddTaskPage {
 
+  taskForm: FormGroup;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public viewCtrl: ViewController) {
+              public viewCtrl: ViewController,
+              private formBuilder: FormBuilder) {
+    this.taskForm = this.formBuilder.group({
+      startTime: [''],
+      endTime:[''],
+      title:['', Validators.required],
+      description:['']
+    });
   }
 
   ionViewDidLoad() {
@@ -25,7 +35,12 @@ export class AddTaskPage {
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss(this.taskForm.value);
+  }
+
+  onSubmit() {
+    console.log(this.taskForm.value);
+    this.dismiss();
   }
 
 }

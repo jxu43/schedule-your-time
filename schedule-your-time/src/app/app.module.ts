@@ -13,6 +13,11 @@ import { SignupPage } from "../pages/signup/signup";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { TaskProvider } from '../providers/task/task';
+import { ProcessHttpmsgProvider } from '../providers/process-httpmsg/process-httpmsg';
+
+import { HttpClientModule } from "@angular/common/http";
+import { baseURL } from '../shared/baseurl';
 
 
 @NgModule({
@@ -29,6 +34,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -44,7 +50,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: 'BaseURL', useValue: baseURL },
+    TaskProvider,
+    ProcessHttpmsgProvider
   ]
 })
 export class AppModule {}
